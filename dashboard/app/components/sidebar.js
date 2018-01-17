@@ -11,9 +11,5 @@ let Sidebar = Vue.component("sidebar-component", {
 							</li>
 						</ul>
 					</div>
-
-					<div>
-						
-					</div>
 				</aside>`,
 });
