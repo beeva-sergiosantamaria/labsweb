@@ -4,10 +4,10 @@ let Sidebar = Vue.component("sidebar-component", {
 						<h5>Store</h5>
 						<ul class="nav flex-column">
 							<li class="nav-item">
-								<a class="nav-link" href="#">New</a>
+								<router-link class="nav-link" to="/store/new">New</router-link>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link active" href="#">List</a>
+								<router-link class="nav-link" to="/store">List</router-link>
 							</li>
 						</ul>
 					</div>

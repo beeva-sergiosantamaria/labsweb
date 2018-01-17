@@ -1,6 +1,14 @@
 const routes = [
-	{ path: "/", component: Main },
-	{ path: "/login", component: Login }
+	{ path: "/login", component: Login },
+	{ 
+		path: "/", 
+		component: Main,
+		children: [
+			{ path: "store", component: Store },
+			{ path: "store/:id", component: StoreForm },
+			{ path: "store/new", component: StoreForm }
+		]
+	},
 ]
 
 const Router = new VueRouter({ routes });
