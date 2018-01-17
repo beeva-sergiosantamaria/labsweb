@@ -25,19 +25,14 @@ let Navbar = Vue.component("navbar-component", {
 		}
 	},
 	created() {
-		this.setUserInfo();
+		let user = this.$storage.get("user");
+		if (user) this.user = user;
 	},
 	methods: { 
 		logout() {
-			this.$dataStorage.remove("user");
+			this.$auth.logout();
+			this.$storage.remove("user");
 			Router.push("/login");
-		},
-		setUserInfo() {
-			let user = this.$dataStorage.get("user");
-
-			if (user) {
-				this.user = user;
-			};
 		}
 	}
 });

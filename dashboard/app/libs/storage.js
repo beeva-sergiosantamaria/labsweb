@@ -1,4 +1,4 @@
-class DataStorage {
+class Storage {
 	constructor() {
 		if (window.localStorage) {
 			this.storage = window.localStorage;

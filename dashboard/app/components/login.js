@@ -19,7 +19,7 @@ let Login = Vue.component("login-component", {
 			let hd = "beeva.com";
 
 			this.$auth.login((user) => {
-				this.$dataStorage.set("user", user);
+				this.$storage.set("user", user);
 				Router.push("/");
 			});
 		}

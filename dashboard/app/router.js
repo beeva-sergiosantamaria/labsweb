@@ -14,9 +14,9 @@ const routes = [
 const Router = new VueRouter({ routes });
 
 Router.beforeEach((to, from, next) => {
-	const $datastorage = new DataStorage();
+	const $storage = new Storage();
 
-	let user = $datastorage.get("user");
+	let user = $storage.get("user");
 	if (!user && to.path !== "/login") {
 		Router.push("/login");
 	} else if (user && to.path === "/login") {

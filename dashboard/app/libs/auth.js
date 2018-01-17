@@ -28,6 +28,6 @@ class Auth {
 	}
 
 	logout() {
-
+		this.auth2.signOut();
 	}
 }
