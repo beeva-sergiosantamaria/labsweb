@@ -1,5 +1,5 @@
 let Sidebar = Vue.component("sidebar-component", {
-	template:	`<aside class="col-3 my-5">
+	template:	`<aside class="col-3">
 					<div>
 						<h5>Store</h5>
 						<ul class="nav flex-column">

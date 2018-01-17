@@ -14,10 +14,10 @@ const routes = [
 const Router = new VueRouter({ routes });
 
 Router.beforeEach((to, from, next) => {
-	let user = localStorage.getItem("user");
-	let signed = Boolean(user) && (user !== null);
+	const $datastorage = new DataStorage();
 
-	if (!signed && to.path !== "/login") {
+	let user = $datastorage.get("user");
+	if (!user && to.path !== "/login") {
 		Router.push("/login");
 	} else {
 		next();

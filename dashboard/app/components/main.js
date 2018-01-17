@@ -1,7 +1,7 @@
 let Main = Vue.component("main-component", {
 	template:	`<div class="container my-5">
 					<navbar></navbar>
-					<div class="row">
+					<div class="row my-3">
 						<sidebar></sidebar>
 						<router-view></router-view>
 					</div>

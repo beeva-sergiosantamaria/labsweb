@@ -19,28 +19,19 @@ let Navbar = Vue.component("navbar-component", {
 				</div>`,
 	data() {
 		return {
-			user: {},
-			auth2: {},
-			client_id: "263408493667-bkmerbo03rbdcdv328r95v9cl73qmimp.apps.googleusercontent.com"
+			user: {}
 		}
 	},
 	created() {
-		gapi.load("auth2", () => {
-			let client_id = this.client_id;
-
-			this.auth2 = gapi.auth2.init({ client_id });
-		});
-
 		this.setUserInfo();
 	},
 	methods: { 
 		logout() {
-			localStorage.removeItem("user");
+			this.$dataStorage.remove("user");
 			Router.push("/login");
 		},
 		setUserInfo() {
-			let userdata = localStorage.getItem("user");
-			let user = (userdata) ? JSON.parse(userdata) : false;
+			let user = this.$dataStorage.get("user");
 
 			if (user) {
 				this.user = user;
