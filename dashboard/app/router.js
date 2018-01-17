@@ -19,6 +19,8 @@ Router.beforeEach((to, from, next) => {
 	let user = $datastorage.get("user");
 	if (!user && to.path !== "/login") {
 		Router.push("/login");
+	} else if (user && to.path === "/login") {
+
 	} else {
 		next();
 	}

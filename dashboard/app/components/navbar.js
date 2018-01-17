@@ -4,15 +4,17 @@ let Navbar = Vue.component("navbar-component", {
 						<h2>Dashboard</h2>
 					</div>
 					<div class="col-auto">
-						<div class="row">
-							<div class="col-auto">
-								<img v-bind:src="user.picture" width="25" class="rounded-circle">
-							</div>
-							<div class="col-auto">
-								<span class="d-block">{{ user.name }}</span>
-								<a class="badge badge-outline-secondary my-2" v-on:click="logout">
-									Logout <i class="fa fa-sign-out"></i>
-								</a>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-auto">
+									<img v-bind:src="user.picture" width="60" class="rounded-circle mr-3">
+								</div>
+								<div class="col-auto">
+									<span class="d-block">{{ user.name }}</span>
+									<a class="badge badge-outline-secondary my-2" v-on:click="logout">
+										Logout <i class="fa fa-sign-out"></i>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
