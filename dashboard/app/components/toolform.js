@@ -50,8 +50,7 @@ let ToolForm = Vue.component("storeform-component", {
             technologyStates:  [
                 {"text": "Adopt", "value": "Adopt"},
                 {"text": "Transfer", "value": "Transfer"},
-                {"text": "Core", "value": "core"},
-
+                {"text": "Core", "value": "core"}
             ]
         }
     },

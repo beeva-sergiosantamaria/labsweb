@@ -30,4 +30,11 @@ class Database {
 		table.push();
 		table.set(data);
 	}
+
+	update(ref, key, data) {
+		let _ref = `${ ref }/${ key }`;
+		this.database.ref(ref).remove().then(() => {
+			this.database.ref(ref).set(data);
+		});
+	}
 }
