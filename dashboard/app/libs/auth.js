@@ -1,8 +1,5 @@
 class Auth {
-	constructor(sdk, client_id, scope) {
-		/*this.client_id = client_id;
-		this.scope = scope || "profile email";*/
-
+	constructor(sdk) {
 		this.config = {
 			apiKey: "AIzaSyCal5JwytwBtJYw6cbkYKEA71bUt0dxfsM",
 			authDomain: "beeweb-192310.firebaseapp.com",
@@ -15,9 +12,6 @@ class Auth {
 
 		this.provider = new firebase.auth.GoogleAuthProvider();
 		this.auth2 = sdk.auth();
-		/*gapi.load("auth2", () => {
-			this.auth2 = gapi.auth2.init({ client_id });
-		});*/
 	}
 
 	login(success, error) {
@@ -35,12 +29,6 @@ class Auth {
 
 			success(user);
 		}).catch(error);
-
-		/*this.auth2.signIn({ scope: this.scope })
-			.then((response) => {
-				
-			})
-			.then(error);*/
 	}
 
 	logout() {

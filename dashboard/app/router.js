@@ -5,7 +5,7 @@ const routes = [
 		component: Main,
 		children: [
 			{ name: "home", path: "", component: Home },
-			{ name: "tools", path: "tools", component: ToolsList },
+			{ name: "tools", path: "tools", component: ToolList },
 			{ name: "edit-tool", path: "tools/:id", component: ToolForm },
 			{ name: "new-tool", path: "tools/new", component: ToolForm }
 		]
