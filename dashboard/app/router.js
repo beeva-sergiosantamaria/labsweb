@@ -1,10 +1,10 @@
 const routes = [
 	{ name: "login", path: "/login", component: Login },
 	{ 
-		name: "home",
 		path: "/", 
 		component: Main,
 		children: [
+			{ name: "home", path: "", component: Home },
 			{ name: "tools", path: "tools", component: ToolsList },
 			{ name: "edit-tool", path: "tools/:id", component: StoreForm },
 			{ name: "new-tool", path: "tools/new", component: StoreForm }

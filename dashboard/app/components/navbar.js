@@ -1,7 +1,7 @@
 let Navbar = Vue.component("navbar-component", {
-	template:	`<div class="d-flex justify-content-between">
+	template:	`<div class="d-flex justify-content-between align-items-center">
 					<div class="col-auto">
-						<h2>Dashboard</h2>
+						<img class="d-inline-block" height="50" src="assets/img/logo.png"/>
 					</div>
 					<div class="col-auto">
 						<div class="container-fluid">
