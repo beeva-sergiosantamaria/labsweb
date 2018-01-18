@@ -1,5 +1,5 @@
 class Database {
-	constructor() {
+	constructor(sdk) {
 		this.config = {
 			apiKey: "AIzaSyCal5JwytwBtJYw6cbkYKEA71bUt0dxfsM",
 			authDomain: "beeweb-192310.firebaseapp.com",
@@ -9,8 +9,8 @@ class Database {
 			messagingSenderId: "263408493667"
 		};
 
-		this.sdk = firebase.initializeApp(this.config);
-		this.database = this.sdk.database();
+		//this.sdk = firebase.initializeApp(this.config);
+		this.database = sdk.database();
 	}
 
 	get(ref, callback) {
