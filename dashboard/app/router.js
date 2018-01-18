@@ -6,8 +6,8 @@ const routes = [
 		children: [
 			{ name: "home", path: "", component: Home },
 			{ name: "tools", path: "tools", component: ToolsList },
-			{ name: "edit-tool", path: "tools/:id", component: StoreForm },
-			{ name: "new-tool", path: "tools/new", component: StoreForm }
+			{ name: "edit-tool", path: "tools/:id", component: ToolForm },
+			{ name: "new-tool", path: "tools/new", component: ToolForm }
 		]
 	},
 	{ name: "notfound", path: "404", component: NotFound },
