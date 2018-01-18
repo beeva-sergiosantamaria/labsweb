@@ -32,7 +32,7 @@ let Navbar = Vue.component("navbar-component", {
 		logout() {
 			this.$auth.logout();
 			this.$storage.remove("user");
-			Router.push("/login");
+			Router.push("login");
 		}
 	}
 });

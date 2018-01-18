@@ -20,7 +20,7 @@ let Login = Vue.component("login-component", {
 
 			this.$auth.login((user) => {
 				this.$storage.set("user", user);
-				Router.push("/");
+				Router.push({ name: "home" });
 			});
 		}
 	}

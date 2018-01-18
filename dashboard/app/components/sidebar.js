@@ -1,15 +1,16 @@
 let Sidebar = Vue.component("sidebar-component", {
-	template:	`<aside class="col-3">
-					<div>
-						<h5>Store</h5>
-						<ul class="nav flex-column">
-							<li class="nav-item">
-								<router-link class="nav-link" to="/store/new">New</router-link>
-							</li>
-							<li class="nav-item">
-								<router-link class="nav-link" to="/store">List</router-link>
-							</li>
-						</ul>
+	template:	`<aside class="card">
+					<div class="card-body px-0 py-2">
+						<div class="d-block item">
+							<router-link tag="span" class="nav-link" to="/">
+								<i class="fa fa-home" aria-hidden="true"></i> Home
+							</router-link>
+						</div>
+						<div class="d-block item">
+							<router-link tag="span" class="nav-link" to="/tools">
+								<i class="fa fa-cog" aria-hidden="true"></i> Tools
+							</router-link>
+						</div>
 					</div>
 				</aside>`,
 });
