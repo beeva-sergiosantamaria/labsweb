@@ -46,11 +46,15 @@ let ToolList = Vue.component("tools-list-component", {
 		}
 	},
 	created() {
-		this.$database.get("tool", (res) => {
-			res.forEach((tool, id) => {
-				tool.id = id;
-				this.tool.push(tool);
-			})
+		this.$database.get("tools", (res) => {
+			if (res) {
+				res.forEach((tool, id) => {
+					tool.id = id;
+					this.tools.push(tool);
+				});
+			} else {
+				//Handle no tools error
+			}
 		});
 	}
 });

@@ -1,4 +1,4 @@
-let ToolForm = Vue.component("storeform-component", {
+let ToolForm = Vue.component("toolform-component", {
     template:	`<div>
 					<form>
 					    <div class="form-group">
@@ -43,33 +43,34 @@ let ToolForm = Vue.component("storeform-component", {
     data(){
         return{
             user: {},
-            tool: {"description": "",
-                "links": "",
-                "demo": "",
-                "graphic": "",
-                "firststeps": "",
-                "tags": "",
-                "tagexp": "",
-                "selected": "",
-                "technoState":""
+            tool: {
+                description: "",
+                links: "",
+                demo: "",
+                graphic: "",
+                firststeps: "",
+                tags: "",
+                tagexp: "",
+                selected: "",
+                technoState:""
             },
-            tags:[
-                {"text": "Frontend", "value": "frontend"},
-                {"text": "Backend", "value": "backend"},
-                {"text": "Mobile", "value": "mobile"},
-                {"text": "Big Data", "value": "bigdata"},
-                {"text": "IoT", "value": "iot"},
-                {"text": "Cloud", "value": "cloud"},
-                {"text": "DevOps", "value": "devops"},
-                {"text": "Security", "value": "security"},
-                {"text": "Blockchain", "value": "blockchain"},
-                {"text": "DevOps", "value": "devops"},
-                {"text": "Human-Computer Interfaces", "value": "hci"}
+            tags: [
+                { text: "Frontend", value: "frontend" },
+                { text: "Backend", value: "backend" },
+                { text: "Mobile", value: "mobile" },
+                { text: "Big Data", value: "bigdata" },
+                { text: "IoT", value: "iot" },
+                { text: "Cloud", value: "cloud" },
+                { text: "DevOps", value: "devops" },
+                { text: "Security", value: "security" },
+                { text: "Blockchain", value: "blockchain" },
+                { text: "DevOps", value: "devops" },
+                { text: "Human-Computer Interfaces", value: "hci" }
             ],
-            technologyStates:  [
-                {"text": "Adopt", "value": "Adopt"},
-                {"text": "Transfer", "value": "Transfer"},
-                {"text": "Core", "value": "core"}
+            technologyStates: [
+                { text: "Adopt", value: "adopt" },
+                { text: "Transfer", value: "transfer" },
+                { text: "Core", value: "core" }
             ]
         }
     },
@@ -85,14 +86,12 @@ let ToolForm = Vue.component("storeform-component", {
 
 
     },
-    methods:{
-        sendInfo(){
+    methods: {
+        sendInfo() {
             console.log(this.tool.description)
-        }
-        ,
-        validateInfo(){
+        },
+        validateInfo() {
 
         }
     }
-
 });
