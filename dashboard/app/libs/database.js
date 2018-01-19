@@ -32,7 +32,7 @@ class Database {
 		let table = this.database.ref(ref);
 
 		let newChild = table.push();
-		newChild.table.set(data)
+		newChild.set(data)
 			.then(callback)
 			.catch(error);
 	}
@@ -42,7 +42,7 @@ class Database {
 		this.database.ref(ref)
 			.remove()
 			.then(() => {
-				this.database.ref(ref)
+				this.databawse.ref(ref)
 					.set(data)
 					.then(callback)
 					.catch(error);

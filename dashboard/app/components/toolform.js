@@ -79,9 +79,9 @@ let ToolForm = Vue.component("toolform-component", {
         console.log(table);
         this.$database.get(table, (res) => {
             console.log(res);
-            //Object.entries(res).forEeach(([key, value])=>{
-            //    this.tool[key] = value;
-            //});
+            Object.entries(res).forEach(([key, value])=>{
+                this.tool[key] = value;
+            });
         });
 
 
@@ -89,6 +89,7 @@ let ToolForm = Vue.component("toolform-component", {
     methods: {
         sendInfo() {
             console.log(this.tool.description)
+            this.$database.append('tools/', this.tool, console.log, 1);
         },
         validateInfo() {
 
