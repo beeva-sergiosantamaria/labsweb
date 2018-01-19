@@ -3,35 +3,35 @@ let ToolForm = Vue.component("storeform-component", {
 					<form>
 					    <div class="form-group">
 						    <label>Description: </label>
-						    <textarea type="text" class="form-control" v-model="tools.description" placeholder="edit me"></textarea>
+						    <textarea type="text" class="form-control" v-model="tool.description" placeholder="edit me"></textarea>
 					    </div>
 					    <div class="form-group">
 						    <label>Links: </label>
-						    <textarea type="text" class="form-control" v-model="tools.links" placeholder="edit me"></textarea>
+						    <textarea type="text" class="form-control" v-model="tool.links" placeholder="edit me"></textarea>
 						</div>
 					    <div class="form-group">					
     						<label>Demo: </label>
-						    <textarea type="text" class="form-control" v-model="tools.demo" placeholder="edit me"></textarea>
+						    <textarea type="text" class="form-control" v-model="tool.demo" placeholder="edit me"></textarea>
 					    </div>
 					    <div class="form-group">					
     						<label>Graphic material: </label>
-    						<textarea type="text" class="form-control" v-model="tools.graphic" placeholder="edit me"></textarea>
+    						<textarea type="text" class="form-control" v-model="tool.graphic" placeholder="edit me"></textarea>
 					    </div>
 					    <div class="form-group">											
 						    <label>First steps: </label>
-						    <textarea type="text" class="form-control" v-model="tools.firststeps" placeholder="edit me"></textarea>
+						    <textarea type="text" class="form-control" v-model="tool.firststeps" placeholder="edit me"></textarea>
 					    </div>
 						
 					    <div class="form-group">											
 						    <label>Tags: </label>
-						    <select class="custom-select" v-model="tools.selected">
+						    <select class="custom-select" v-model="tool.selected">
   							    <option v-for="tag in tags" v-bind:value="tag.value">{{ tag.text }}</option>
 						    </select>
 					    </div>
 					    
 					    <div class="form-group">											
 						    <label>State: </label>
-						    <select class="custom-select" v-model="tools.technoState">
+						    <select class="custom-select" v-model="tool.technoState">
   							    <option v-for="techno in technologyStates" v-bind:value="techno.value">{{ techno.text }}</option>
 						    </select>
 					    </div>
@@ -43,7 +43,7 @@ let ToolForm = Vue.component("storeform-component", {
     data(){
         return{
             user: {},
-            tools: {"description": "",
+            tool: {"description": "",
                 "links": "",
                 "demo": "",
                 "graphic": "",
@@ -74,16 +74,20 @@ let ToolForm = Vue.component("storeform-component", {
         }
     },
     created(){
-        console.log(this.$route.params.id);
-        this.$database.get(this.$route.params.id, (res) => {
+        let table = `tools/${ this.$route.params.id }`;
+        console.log(table);
+        this.$database.get(table, (res) => {
             console.log(res);
-        })
+            //Object.entries(res).forEeach(([key, value])=>{
+            //    this.tool[key] = value;
+            //});
+        });
 
 
     },
     methods:{
         sendInfo(){
-            console.log(this.tools.description)
+            console.log(this.tool.description)
         }
         ,
         validateInfo(){
