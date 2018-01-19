@@ -52,27 +52,44 @@ let ToolList = Vue.component("tools-list-component", {
 		}
 	},
 	created() {
-		this.$database.get("tools", (res) => {
-			if (res) {
-				let values = res;
-				Object.keys(values).forEach((id) => {
-					let tool = values[id];
-					tool.id = id;
-					this.tools.push(tool);
-				});
-			} else {
-				//Handle no tools error
-			}
-		});
+		this.syncTools();	
 	},
 	methods: {
+		syncTools() {
+			this.tools = [];
+			this.$database.get("tools", 
+				(res) => {
+					if (res) {
+						let values = res;
+						Object.keys(values).forEach((id) => {
+							let tool = values[id];
+							tool.id = id;
+							this.tools.push(tool);
+						});
+					} else {
+						EventBus.$emit("alert", { type: "warning", message: "No tools found on database" });
+					}
+				},
+				(err) => {
+					EventBus.$emit("alert", { type: "danger", message: "Error synchronizing tools. More details on console" });
+					console.error(err);
+				}
+			);
+		},
 		deleteTool(tool) {
 			console.log(tool);
 			if (tool) {
 				let ref = `tools/${ tool.id }`;
-				this.$database.remove(ref, () => {
-					let index = this.tools.indexOf(tool);
-				});
+				this.$database.remove(ref, 
+					() => {
+						let index = this.tools.indexOf(tool);
+						this.syncTools();
+					},
+					(err) => {
+						EventBus.$emit("alert", { type: "danger", message: "Error deleting tool. More details on console" });
+						console.error(err);
+					}
+				);
 			}
 		}
 	}

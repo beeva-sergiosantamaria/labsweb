@@ -1,7 +1,13 @@
 let app = new Vue({
 	el: "#app",
-	template:	`<router-view></router-view>`,
+	template:	`<section>
+					<alert></alert>
+					<router-view></router-view>
+				</section>`,
 	router: Router,
+	components: {
+		"alert": Alert
+	},
 	data() {
 		return {
 			config: {

@@ -19,13 +19,28 @@ let Login = Vue.component("login-component", {
 				</div>`,
 	methods: {
 		signIn() {
-			let scope = "profile email";
-			let hd = "beeva.com";
-
-			this.$auth.login((user) => {
-				this.$storage.set("user", user);
-				Router.push({ name: "home" });
-			});
+			this.$auth.login(
+				(user) => {
+					this.$database.get("users", 
+						(res) => {
+							if (Object.keys(res).indexOf(user.id) !== -1) {
+								this.$storage.set("user", user);
+								Router.push({ name: "home" });
+							} else {
+								EventBus.$emit("alert", { type: "danger", message: "User no registered" });
+							}
+						},
+						(err) => {
+							console.error(err);
+							EventBus.$emit("alert", { type: "danger", message: "Error getting users. More details on console" })
+						}
+					);
+				},
+				(err) => {
+					console.error(err);
+					EventBus.$emit("alert", { type: "danger", message: "Error validating user data. More details on console" });
+				}
+			);
 		}
 	}
 });

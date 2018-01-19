@@ -30,9 +30,17 @@ let Navbar = Vue.component("navbar-component", {
 	},
 	methods: { 
 		logout() {
-			this.$auth.logout();
-			this.$storage.remove("user");
-			Router.push("login");
+			this.$auth.logout(
+				() => {
+					this.$storage.remove("user");
+					EventBus.$emit("alert", { type: "success", message: "Bye!" });
+					Router.push("login");
+				},
+				(err) => {
+					console.error(err);
+					EventBus.$emit("alert", { type: "danger", message: "Error logging out. More details on console!" });
+				}
+			);
 		}
 	}
 });
