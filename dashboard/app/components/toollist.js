@@ -13,7 +13,9 @@ let ToolList = Vue.component("tools-list-component", {
 							</div>
 						</div>
 
-						<div class="table-responsive">
+						<p v-if="tools.length == 0" class="card-text">No tools stored on database. Create one now!</p>
+
+						<div class="table-responsive" v-if="tools.length">
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -29,10 +31,14 @@ let ToolList = Vue.component("tools-list-component", {
 										<td scope="col">{{ tool.title }}</td>
 										<td scope="col">{{ tool.tag }}</td>
 										<td scope="col">
-											<router-link class="badge badge-pill badge-light" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
+											<router-link tag="button" class="btn btn-outline-primary btn-pill btn-sm py-1" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
 												Edit
 												<i class="fa fa-pencil-square-o"></i>
 											</router-link>
+											<button class="btn btn-outline-danger btn-pill btn-sm py-1" v-on:click="deleteTool(tool)">
+												Delete
+												<i class="fa fa-trash"></i>
+											</button>
 										</td>
 									</tr>
 								</tbody>
@@ -48,7 +54,9 @@ let ToolList = Vue.component("tools-list-component", {
 	created() {
 		this.$database.get("tools", (res) => {
 			if (res) {
-				res.forEach((tool, id) => {
+				let values = res;
+				Object.keys(values).forEach((id) => {
+					let tool = values[id];
 					tool.id = id;
 					this.tools.push(tool);
 				});
@@ -56,5 +64,16 @@ let ToolList = Vue.component("tools-list-component", {
 				//Handle no tools error
 			}
 		});
+	},
+	methods: {
+		deleteTool(tool) {
+			console.log(tool);
+			if (tool) {
+				let ref = `tools/${ tool.id }`;
+				this.$database.remove(ref, () => {
+					let index = this.tools.indexOf(tool);
+				});
+			}
+		}
 	}
 });

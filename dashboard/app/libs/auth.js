@@ -9,29 +9,30 @@ class Auth {
 			messagingSenderId: "263408493667"
 		};
 
-
 		this.provider = new firebase.auth.GoogleAuthProvider();
 		this.auth2 = sdk.auth();
 	}
 
-	login(success, error) {
-		this.auth2.signInWithPopup(this.provider).then((response) => {
-			let profile = response.user;
-			let credential = response.credential;
+	login(callback, error) {
+		this.auth2.signInWithPopup(this.provider)
+			.then((response) => {
+				let profile = response.user;
+				let credential = response.credential;
 
-			let user = {
-				credential,
-				id: profile.uid,
-				name: profile.displayName,
-				email: profile.email,
-				picture: profile.photoURL
-			};
-
-			success(user);
-		}).catch(error);
+				callback({
+					credential,
+					id: profile.uid,
+					name: profile.displayName,
+					email: profile.email,
+					picture: profile.photoURL
+				});
+			})
+			.catch(error);
 	}
 
-	logout() {
-		this.auth2.signOut();
+	logout(callback, error) {
+		this.auth2.signOut()
+			.then(callback)
+			.catch(error);
 	}
 }
