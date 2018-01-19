@@ -1,6 +1,18 @@
 let ToolList = Vue.component("tools-list-component", {
 	template:	`<div class="card">
 					<div class="card-body pw-0 pb-2">
+						<div class="row justify-content-between mb-3">
+							<div class="col-auto">
+								<h4 class="card-title">Tools</h4>
+							</div>
+							<div class="col-auto">
+								<router-link to="/tools/new" tag="button" type="button" class="btn btn-primary btn-pill btn-sm">
+									Add new tool
+									<i class="fa fa-plus"></i>
+								</router-link>
+							</div>
+						</div>
+
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>
