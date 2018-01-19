@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const routes = [
 	{ name: "login", path: "/login", component: Login },
 	{ 
