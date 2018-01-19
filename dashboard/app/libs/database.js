@@ -31,12 +31,9 @@ class Database {
 	append(ref, data, callback, error) {
 		let table = this.database.ref(ref);
 
-		table.push()
-			.then(() => {
-				table.set(data)
-					.then(callback)
-					.catch(error);	
-			})
+		let newChild = table.push();
+		newChild.table.set(data)
+			.then(callback)
 			.catch(error);
 	}
 
