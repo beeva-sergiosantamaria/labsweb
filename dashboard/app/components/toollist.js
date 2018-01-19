@@ -1,7 +1,7 @@
 let ToolList = Vue.component("tools-list-component", {
 	template:	`<div class="card">
 					<div class="card-body pw-0 pb-2">
-						<div class="row justify-content-between mb-3">
+						<div class="row justify-content-between mb-3 px-3">
 							<div class="col-auto">
 								<h4 class="card-title">Tools</h4>
 							</div>
