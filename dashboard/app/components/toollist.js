@@ -27,15 +27,17 @@ let ToolList = Vue.component("tools-list-component", {
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Title</th>
-											<th scope="col">Tag</th>
-											<th scope="col">Actions</th>
+											<th scope="col"><i class="mr-2 fa fa-cog"></i> Title</th>
+											<th scope="col"><i class="mr-2 fa fa-tag"></i> Tag</th>
+											<th scope="col"><i class="mr-2 fa fa-thermometer-full"></i> Status</th>
+											<th scope="col"><i class="mr-2 fa fa-wrench"></i> Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr v-for="tool in tools">
 											<td scope="row">{{ tool.title }}</td>
-											<td>{{ tool.tag }}</td>
+											<td>{{ tool.tag | capitalize  }}</td>
+											<td>{{ tool.status | capitalize  }}</td>
 											<td>
 												<router-link tag="button" class="btn btn-outline-primary btn-pill btn-sm py-1" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
 													Edit

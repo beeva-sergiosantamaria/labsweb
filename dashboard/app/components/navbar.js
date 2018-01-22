@@ -11,7 +11,7 @@ let Navbar = Vue.component("navbar-component", {
 								</div>
 								<div class="col-auto">
 									<span class="d-block">{{ user.name }}</span>
-									<a class="badge badge-outline-secondary my-2" v-on:click="logout">
+									<a class="badge badge-pill badge-outline-secondary my-2" v-on:click="logout">
 										Logout <i class="fa fa-sign-out"></i>
 									</a>
 								</div>

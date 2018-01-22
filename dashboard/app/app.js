@@ -27,6 +27,13 @@ let app = new Vue({
 
 		Vue.prototype.$auth = new Auth(sdk);
 		Vue.prototype.$storage = new Storage();
-		Vue.prototype.$database = new Database(sdk);	
+		Vue.prototype.$database = new Database(sdk);
+
+		Vue.filter('capitalize', (value) => {
+			if (!value) return "";
+			
+			value = value.toString();
+			return value.charAt(0).toUpperCase() + value.slice(1);
+		});
 	}
 });
