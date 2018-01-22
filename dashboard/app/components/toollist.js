@@ -73,7 +73,21 @@ let ToolList = Vue.component("tools-list-component", {
 				this.$database.remove(ref, () => {
 					let index = this.tools.indexOf(tool);
 				});
+				this.tools = [];
+                this.$database.get("tools", (res) => {
+                    if (res) {
+                        let values = res;
+                        Object.keys(values).forEach((id) => {
+                            let tool = values[id];
+                            tool.id = id;
+                            this.tools.push(tool);
+                        });
+                    } else {
+                        //Handle no tools error
+                    }
+                });
 			}
-		}
+
+        }
 	}
 });
