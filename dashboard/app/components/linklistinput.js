@@ -45,20 +45,24 @@ let LinkListInput = Vue.component("link-list-input-component", {
 	data() {
 		return {
 			newLink: {},
+			initialLinks: this.links,
 			internalLinks: []
 		}
 	},
 	created() {
-		if (this.links) {
-			let linkList = this.links.split("\n");
-			linkList.forEach((link) => {
-				let title = link.split("||")[0];
-				let url = link.split("||")[1];
-				this.internalLinks.push({ title, url });
-			});
-		}
+		
 	},
 	watch: {
+		links: {
+			handler(value) {
+				let linkList = value.split("\n");
+				linkList.forEach((link) => {
+					let title = link.split("||")[0];
+					let url = link.split("||")[1];
+					this.internalLinks.push({ title, url });
+				});
+			}
+		},
 		internalLinks: {
 			handler(value) {
 				let links = [];
@@ -68,8 +72,7 @@ let LinkListInput = Vue.component("link-list-input-component", {
 
 				let raw = links.join("\n");
 				this.$emit("change", raw);
-			},
-      		deep: true
+			}
 		}
 	},
 	methods: {

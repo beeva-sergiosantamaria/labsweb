@@ -50,7 +50,7 @@ let ToolForm = Vue.component("toolform-component", {
 								</div>
 							</div>
 
-							<linklist-input :links="tool.links" v-on:change="handleList"></linklist-input>
+							<linklist-input :links="currentLinks" v-on:change="handleList"></linklist-input>
 						</div>
 
 						<div class="card-footer">
@@ -88,6 +88,7 @@ let ToolForm = Vue.component("toolform-component", {
 		return{
 			user: {},
 			toolKey: "",
+			currentLinks: "",
 			tool: {
 				title: "",
 				description: "",
@@ -130,6 +131,7 @@ let ToolForm = Vue.component("toolform-component", {
 						Object.entries(res).forEach(([key, value])=>{
 							this.tool[key] = value;
 						});
+						this.currentLinks = this.tool.links;
 					}
 				}, 
 				(err) => {

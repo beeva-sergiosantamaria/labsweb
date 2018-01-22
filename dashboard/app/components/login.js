@@ -10,7 +10,7 @@ let Login = Vue.component("login-component", {
 									<div class="card-body">
 										<h5 class="card-title">LabsWeb Dashboard</h5>
 										<p class="card-text">Manage all resources of LabsWeb.</p>
-										<button type="button" class="btn btn-primary" v-on:click="signIn">
+										<button type="button" class="btn btn-primary btn-pill" v-on:click="signIn">
 											Login with <i class="fa fa-lg fa-google"></i>
 										</button>
 									</div>

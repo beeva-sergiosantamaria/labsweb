@@ -4,15 +4,9 @@ class Database {
 	}
 
 	get(ref, callback, error) {
-		this.database.ref(ref)
-			.on("value", 
-				(res) => {
-					callback(res.val());
-				},
-				(err) => {
-					error(err);
-				}
-			);
+		this.database.ref(ref).once("value")
+			.then((res) => callback(res.val()))
+			.catch(error);
 	}
 
 	stop(ref) {
