@@ -56,14 +56,15 @@ let ToolList = Vue.component("tools-list-component", {
 	},
 	methods: {
 		syncTools() {
-			this.tools = [];
 			this.$database.get("tools", 
-				(res) => {
-					if (res) {
-						let values = res;
+				(values) => {
+					if (values) {
+						this.tools = [];
+						
 						Object.keys(values).forEach((id) => {
 							let tool = values[id];
 							tool.id = id;
+
 							this.tools.push(tool);
 						});
 					} else {
@@ -77,11 +78,9 @@ let ToolList = Vue.component("tools-list-component", {
 			);
 		},
 		deleteTool(tool) {
-			console.log(tool);
 			if (tool) {
 				let ref = `tools/${ tool.id }`;
 				this.$database.remove(ref, () => {
-						let index = this.tools.indexOf(tool);
 						this.syncTools();
 					},
 					(err) => {
