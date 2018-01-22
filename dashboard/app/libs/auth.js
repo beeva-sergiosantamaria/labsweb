@@ -4,6 +4,10 @@ class Auth {
 		this.auth2 = sdk.auth();
 	}
 
+	currentUser() {
+		return this.auth2.currentUser;
+	}
+
 	login(callback, error) {
 		this.auth2.signInWithPopup(this.provider)
 			.then((response) => {
