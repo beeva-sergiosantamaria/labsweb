@@ -1,6 +1,10 @@
 let ToolForm = Vue.component("toolform-component", {
     template:	`<div>
 					<form>
+						<div class="form-group">
+						    <label>Title: </label>
+						    <textarea type="text" class="form-control" v-model="tool.title" placeholder="edit me"></textarea>
+					    </div>
 					    <div class="form-group">
 						    <label>Description: </label>
 						    <textarea type="text" class="form-control" v-model="tool.description" placeholder="edit me"></textarea>
@@ -24,14 +28,14 @@ let ToolForm = Vue.component("toolform-component", {
 						
 					    <div class="form-group">											
 						    <label>Tags: </label>
-						    <select class="custom-select" v-model="tool.selected">
+						    <select class="custom-select" v-model="tool.tag">
   							    <option v-for="tag in tags" v-bind:value="tag.value">{{ tag.text }}</option>
 						    </select>
 					    </div>
 					    
 					    <div class="form-group">											
 						    <label>State: </label>
-						    <select class="custom-select" v-model="tool.technoState">
+						    <select class="custom-select" v-model="tool.status">
   							    <option v-for="techno in technologyStates" v-bind:value="techno.value">{{ techno.text }}</option>
 						    </select>
 					    </div>
@@ -45,15 +49,14 @@ let ToolForm = Vue.component("toolform-component", {
             user: {},
             toolKey: "",
             tool: {
+                title: "",
                 description: "",
                 links: "",
                 demo: "",
                 graphic: "",
                 firststeps: "",
-                tags: "",
-                tagexp: "",
-                selected: "",
-                technoState:""
+                tag: "",
+                status:""
             },
             tags: [
                 { text: "Frontend", value: "frontend" },
