@@ -79,7 +79,7 @@ let ToolForm = Vue.component("toolform-component", {
         }
     },
     created(){
-        if (this.$route.param.id) {
+        if (this.$route.params.id) {
             let table = `tools/${ this.$route.params.id }`;
             this.toolKey = this.$route.params.id;
             this.$database.get(table, (res) => {
