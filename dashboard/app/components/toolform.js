@@ -21,7 +21,7 @@ let ToolForm = Vue.component("toolform-component", {
 											Tags
 										</label>
 										<select id="tags" class="form-control" v-model="tool.tag">
-											<option v-for="tag in tags" v-bind:value="tag.value">{{ tag.text }}</option>
+											<option v-for="tag in tags" v-bind:value="tag | formatTag">{{ tag }}</option>
 										</select>
 									</div>
 								</div>  
@@ -105,17 +105,17 @@ let ToolForm = Vue.component("toolform-component", {
 				status:""
 			},
 			tags: [
-				{ text: "Frontend", value: "frontend" },
-				{ text: "Backend", value: "backend" },
-				{ text: "Mobile", value: "mobile" },
-				{ text: "Big Data", value: "bigdata" },
-				{ text: "IoT", value: "iot" },
-				{ text: "Cloud", value: "cloud" },
-				{ text: "DevOps", value: "devops" },
-				{ text: "Security", value: "security" },
-				{ text: "Blockchain", value: "blockchain" },
-				{ text: "DevOps", value: "devops" },
-				{ text: "Human-Computer Interfaces", value: "hci" }
+				"Frontend", 
+				"Backend", 
+				"Mobile", 
+				"Big Data", 
+				"IoT", 
+				"Cloud", 
+				"DevOps", 
+				"Security", 
+				"Blockchain", 
+				"DevOps", 
+				"Human Computer Interfaces"
 			],
 			technologyStates: [
 				{ text: "Adopt", value: "adopt" },
@@ -125,9 +125,10 @@ let ToolForm = Vue.component("toolform-component", {
 		}
 	},
 	created() {
-		if (this.$route.params.id && typeof this.$route.params.id === "number") {
-			let table = `tools/${ this.$route.params.id }`;
-			this.toolKey = this.$route.params.id;
+		this.toolKey = (this.$route.params.id && this.$route.params.id !== "new") ? this.$route.params.id : "new"; 
+
+		if (this.toolKey && this.toolKey !== "new") {
+			let table = `tools/${ this.toolKey }`;
 
 			this.$database.get(table, 
 				(res) => {
@@ -142,6 +143,14 @@ let ToolForm = Vue.component("toolform-component", {
 					EventBus.$emit("alert", { type: "danger", message: "Error getting tool info. More details on console" })
 				}
 			);
+		}
+	},
+	filters: {
+		formatTag(tag) {
+			if (!tag) return "";
+			
+			tag = tag.toString().replace(" ", "");
+			return tag.toLowerCase();
 		}
 	},
 	methods: {
