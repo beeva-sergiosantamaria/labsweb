@@ -88,8 +88,9 @@ let ToolForm = Vue.component("toolform-component", {
     },
     methods: {
         sendInfo() {
-            console.log(this.tool.description)
             this.$database.append('tools/', this.tool, console.log, 1);
+            Router.push({ name: "tools" });
+
         },
         validateInfo() {
 
