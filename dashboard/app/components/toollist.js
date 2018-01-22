@@ -21,37 +21,34 @@ let ToolList = Vue.component("tools-list-component", {
 						</div>
 
 						<p v-if="tools.length == 0" class="card-text">No tools stored on database. Create one now!</p>
-						<div class="container" v-if="tools.length">
-
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col"><i class="mr-2 fa fa-cog"></i> Title</th>
-											<th scope="col"><i class="mr-2 fa fa-tag"></i> Tag</th>
-											<th scope="col"><i class="mr-2 fa fa-thermometer-full"></i> Status</th>
-											<th scope="col"><i class="mr-2 fa fa-wrench"></i> Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="tool in tools">
-											<td scope="row">{{ tool.title }}</td>
-											<td>{{ tool.tag | capitalize  }}</td>
-											<td>{{ tool.status | capitalize  }}</td>
-											<td>
-												<router-link tag="button" class="btn btn-outline-primary btn-pill btn-sm py-1" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
-													Edit
-													<i class="fa fa-pencil-square-o"></i>
-												</router-link>
-												<button class="btn btn-outline-danger btn-pill btn-sm py-1" v-on:click="deleteTool(tool)">
-													Delete
-													<i class="fa fa-trash"></i>
-												</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						<div class="table-responsive" v-if="tools.length">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col"><i class="mr-2 fa fa-cog"></i> Title</th>
+										<th scope="col"><i class="mr-2 fa fa-tag"></i> Tag</th>
+										<th scope="col"><i class="mr-2 fa fa-thermometer-full"></i> Status</th>
+										<th scope="col"><i class="mr-2 fa fa-wrench"></i> Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="tool in tools">
+										<td scope="row">{{ tool.title }}</td>
+										<td>{{ tool.tag | capitalize  }}</td>
+										<td>{{ tool.status | capitalize  }}</td>
+										<td>
+											<router-link tag="button" class="btn btn-outline-primary btn-pill btn-sm py-1" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
+												Edit
+												<i class="fa fa-pencil-square-o"></i>
+											</router-link>
+											<button class="btn btn-outline-danger btn-pill btn-sm py-1" v-on:click="deleteTool(tool)">
+												Delete
+												<i class="fa fa-trash"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>`,

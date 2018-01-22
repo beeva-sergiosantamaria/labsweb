@@ -21,7 +21,7 @@ let ToolForm = Vue.component("toolform-component", {
 											Tags
 										</label>
 										<select id="tags" class="form-control" v-model="tool.tag">
-											<option v-for="tag in tags" v-bind:value="tag | formatTag">{{ tag }}</option>
+											<option v-for="tag in tags" v-bind:value="tag | formatName">{{ tag }}</option>
 										</select>
 									</div>
 								</div>  
@@ -44,19 +44,13 @@ let ToolForm = Vue.component("toolform-component", {
 											Status
 										</label>
 										<select id="status" class="form-control" v-model="tool.status">
-											<option v-for="techno in technologyStates" v-bind:value="techno.value">{{ techno.text }}</option>
+											<option v-for="state in technologyStates" v-bind:value="state | formatName">{{ state }}</option>
 										</select>
 									</div>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label for="links">
-									<i class="fa fa-thermometer-full"></i>
-									Links
-								</label>
-								<textarea id="links" class="form-control" v-model="tool.links" placeholder="Link to resources like documentation, related articles,..."></textarea>
-							</div>
+							<linklist-input :links="tool.links" v-on:change="handleList"></linklist-input>
 						</div>
 
 						<div class="card-footer">
@@ -118,9 +112,9 @@ let ToolForm = Vue.component("toolform-component", {
 				"Human Computer Interfaces"
 			],
 			technologyStates: [
-				{ text: "Adopt", value: "adopt" },
-				{ text: "Transfer", value: "transfer" },
-				{ text: "Core", value: "core" }
+				"Adopt",
+				"Transfer",
+				"Core",
 			]
 		}
 	},
@@ -146,7 +140,7 @@ let ToolForm = Vue.component("toolform-component", {
 		}
 	},
 	filters: {
-		formatTag(tag) {
+		formatName(tag) {
 			if (!tag) return "";
 			
 			tag = tag.toString().replace(" ", "");
@@ -165,6 +159,12 @@ let ToolForm = Vue.component("toolform-component", {
 		},
 		validateInfo() {
 
+		},
+		handleList(links) {
+			this.tool.links = links;
 		}
+	},
+	components: {
+		"linklist-input": LinkListInput
 	}
 });
