@@ -29,11 +29,12 @@ class Database {
 	}
 
 	update(ref, key, data, callback, error) {
-		let _ref = `${ ref }/${ key }`;
+		let _ref = `${ ref }${ key }`;
 		this.database.ref(ref)
 			.remove()
 			.then(() => {
-				this.databawse.ref(ref)
+				this.database.ref(ref)
+					.push()
 					.set(data)
 					.then(callback)
 					.catch(error);
