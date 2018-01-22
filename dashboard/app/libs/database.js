@@ -34,7 +34,7 @@ class Database {
 
 	update(ref, key, data, callback, error) {
 		let _ref = `${ ref }${ key }`;
-		this.database.ref(ref)
+		this.database.ref(_ref)
 			.remove()
 			.then(() => {
 				this.database.ref(ref)
