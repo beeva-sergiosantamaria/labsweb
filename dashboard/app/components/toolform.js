@@ -34,7 +34,7 @@ let ToolForm = Vue.component("toolform-component", {
                                             <i class="fa fa-align-left"></i>
                                             Description
                                         </label>
-                                        <textarea id="description" class="form-control" v-model="tool.description" placeholder="Short description to introduce tool applications."></textarea>
+                                        <textarea id="description" class="form-control" v-model="tool.description" placeholder="Short description to introduce tool applications..."></textarea>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -55,7 +55,7 @@ let ToolForm = Vue.component("toolform-component", {
                                     <i class="fa fa-thermometer-full"></i>
                                     Links
                                 </label>
-                                <textarea id="links" class="form-control" v-model="tool.links" placeholder="Link to resources like documentation, related articles, ..."></textarea>
+                                <textarea id="links" class="form-control" v-model="tool.links" placeholder="Link to resources like documentation, related articles,..."></textarea>
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@ let ToolForm = Vue.component("toolform-component", {
                                     <i class="fa fa-bar-chart"></i>
                                     Graphic material
                                 </label>
-        						<textarea id="graphic" class="form-control" v-model="tool.graphic" placeholder="Graphic resources like infographics, presentations, ..."></textarea>
+        						<textarea id="graphic" class="form-control" v-model="tool.graphic" placeholder="Graphic resources like infographics, presentations,..."></textarea>
     					    </div>
     					    <div class="form-group">											
     						    <label for="firststeps">
