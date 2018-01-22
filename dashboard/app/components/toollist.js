@@ -24,10 +24,9 @@ let ToolList = Vue.component("tools-list-component", {
 						<div class="container" v-if="tools.length">
 
 							<div class="table-responsive">
-								<table class="table table-hover">
+								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">ID</th>
 											<th scope="col">Title</th>
 											<th scope="col">Tag</th>
 											<th scope="col">Actions</th>
@@ -35,10 +34,9 @@ let ToolList = Vue.component("tools-list-component", {
 									</thead>
 									<tbody>
 										<tr v-for="tool in tools">
-											<td scope="col">{{ tool.id }}</td>
-											<td scope="col">{{ tool.title }}</td>
-											<td scope="col">{{ tool.tag }}</td>
-											<td scope="col">
+											<td scope="row">{{ tool.title }}</td>
+											<td>{{ tool.tag }}</td>
+											<td>
 												<router-link tag="button" class="btn btn-outline-primary btn-pill btn-sm py-1" v-bind:to="{ name: 'edit-tool', params: { id: tool.id } }">
 													Edit
 													<i class="fa fa-pencil-square-o"></i>
