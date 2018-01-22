@@ -1,7 +1,15 @@
 let app = new Vue({
 	el: "#app",
-	template:	`<router-view></router-view>`,
+	template:	`<section>
+					<alert></alert>
+					<transition name="fade">
+						<router-view></router-view>
+					</transition>
+				</section>`,
 	router: Router,
+	components: {
+		"alert": Alert
+	},
 	data() {
 		return {
 			config: {

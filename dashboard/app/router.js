@@ -10,10 +10,10 @@ const routes = [
 			{ name: "new-tool", path: "tools/new", component: ToolForm }
 		]
 	},
-	{ name: "notfound", path: "404", component: NotFound }
+	{ name: "notfound", path: "*", component: NotFound },
 ]
 
-const Router = new VueRouter({ routes });
+const Router = new VueRouter({  routes });
 
 Router.beforeEach((to, from, next) => {
 	const $storage = new Storage();

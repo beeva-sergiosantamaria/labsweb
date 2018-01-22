@@ -6,7 +6,9 @@ let Main = Vue.component("main-component", {
 							<sidebar></sidebar>
 						</div>
 						<div class="col-10">
-							<router-view></router-view>
+							<transition name="fade">
+								<router-view></router-view>
+							</transition>
 						</div>
 					</div>
 				</div>`,
