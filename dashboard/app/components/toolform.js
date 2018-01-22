@@ -43,6 +43,7 @@ let ToolForm = Vue.component("toolform-component", {
     data(){
         return{
             user: {},
+            toolKey: "",
             tool: {
                 description: "",
                 links: "",
@@ -76,9 +77,8 @@ let ToolForm = Vue.component("toolform-component", {
     },
     created(){
         let table = `tools/${ this.$route.params.id }`;
-        console.log(table);
+        this.toolKey = this.$route.params.id;
         this.$database.get(table, (res) => {
-            console.log(res);
             Object.entries(res).forEach(([key, value])=>{
                 this.tool[key] = value;
             });
@@ -88,7 +88,11 @@ let ToolForm = Vue.component("toolform-component", {
     },
     methods: {
         sendInfo() {
-            this.$database.append('tools/', this.tool, console.log, 1);
+            if (this.toolKey === "new") {
+                this.$database.append('tools/', this.tool, console.log, 1);
+            }else{
+                this.$database.update('tools/', this.toolKey, this.tool, console.log, 1);
+            }
             Router.push({ name: "tools" });
 
         },
