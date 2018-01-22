@@ -5,10 +5,14 @@ class Database {
 
 	get(ref, callback, error) {
 		this.database.ref(ref)
-			.orderByKey()
-			.on("value", (res) => {
-				callback(res.val());
-			});
+			.on("value", 
+				(res) => {
+					callback(res.val());
+				},
+				(err) => {
+					error(err);
+				}
+			);
 	}
 
 	put(ref, key, data, callback, error) {

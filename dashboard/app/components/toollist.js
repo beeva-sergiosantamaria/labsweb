@@ -83,8 +83,6 @@ let ToolList = Vue.component("tools-list-component", {
 								this.tools.push(tool);
 							}
 						});
-					} else {
-						EventBus.$emit("alert", { type: "warning", message: "No tools found on database" });
 					}
 				},
 				(err) => {

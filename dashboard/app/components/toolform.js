@@ -129,9 +129,11 @@ let ToolForm = Vue.component("toolform-component", {
 			let table = `tools/${ this.$route.params.id }`;
 			this.toolKey = this.$route.params.id;
 			this.$database.get(table, (res) => {
-				Object.entries(res).forEach(([key, value])=>{
-					this.tool[key] = value;
-				});
+				if (res) {
+					Object.entries(res).forEach(([key, value])=>{
+						this.tool[key] = value;
+					});
+				}
 			});
 		}
 	},
@@ -140,7 +142,7 @@ let ToolForm = Vue.component("toolform-component", {
 			if (this.toolKey === "new") {
 				this.$database.append('tools/', this.tool, console.log, 1);
 			} else {
-				this.$database.update('tools/', this.toolKey, this.tool, console.log, 1);
+				this.$database.update('tools/', this.toolKey, this.tool, console.log, console.error);
 			}
 			Router.push({ name: "tools" });
 
