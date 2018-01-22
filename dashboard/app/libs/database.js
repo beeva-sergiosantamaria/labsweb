@@ -5,7 +5,7 @@ class Database {
 
 	get(ref, callback, error) {
 		this.database.ref(ref)
-			.on("value", 
+			.once("value", 
 				(res) => {
 					callback(res.val());
 				},
