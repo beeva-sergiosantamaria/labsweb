@@ -128,15 +128,20 @@ let ToolForm = Vue.component("toolform-component", {
 		if (this.$route.params.id && typeof this.$route.params.id === "number") {
 			let table = `tools/${ this.$route.params.id }`;
 			this.toolKey = this.$route.params.id;
-			this.$database.get(table, (res) => {
-				if (res) {
-					Object.entries(res).forEach(([key, value])=>{
-						this.tool[key] = value;
-					});
-				} else {
 
+			this.$database.get(table, 
+				(res) => {
+					if (res) {
+						Object.entries(res).forEach(([key, value])=>{
+							this.tool[key] = value;
+						});
+					}
+				}, 
+				(err) => {
+					console.error(err);
+					EventBus.$emit("alert", { type: "danger", message: "Error getting tool info. More details on console" })
 				}
-			});
+			);
 		}
 	},
 	methods: {
