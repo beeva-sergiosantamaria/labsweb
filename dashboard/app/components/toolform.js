@@ -50,18 +50,14 @@ let ToolForm = Vue.component("toolform-component", {
 								</div>
 							</div>
 
-							<linklist-input :links="decodeLinks(tool.links)" v-on:change="handleList"></linklist-input>
+							<linklist-input title="Links" icon="" :links="decodeLinks(tool.links)" v-on:change="handleLinks"></linklist-input>
 						</div>
 
 						<div class="card-footer">
 							<p class="card-text">Optional information</p>
-							<div class="form-group">					
-								<label for="demo">
-									<i class="fa fa-film"></i>
-									Demo
-								</label>
-								<textarea id="demos" class="form-control" v-model="tool.demo" placeholder="Links to tool demostrations or experiments results and conclusions."></textarea>
-							</div>
+
+							<linklist-input title="Demo" iconClass="fa fa-film" :links="decodeLinks(tool.demo)" v-on:change="handleDemo"></linklist-input>
+
 							<div class="form-group">
 								<label for="graphic">
 									<i class="fa fa-bar-chart"></i>
@@ -87,7 +83,15 @@ let ToolForm = Vue.component("toolform-component", {
 	data(){
 		return{
 			toolKey: "",
-			tool: {},
+			tool: {
+				title: "",
+				description: "",
+				tag: "",
+				status: "",
+				demo: "",
+				graphic: "",
+				firststeps: ""
+			},
 			tags: [
 				"Frontend", 
 				"Backend", 
@@ -122,7 +126,6 @@ let ToolForm = Vue.component("toolform-component", {
 						Object.entries(res).forEach(([key, value])=>{
 							this.tool[key] = value;
 						});
-						this.currentLinks = this.tool.links;
 					}
 				}, 
 				(err) => {
@@ -176,8 +179,11 @@ let ToolForm = Vue.component("toolform-component", {
 		validateInfo() {
 
 		},
-		handleList(links) {
+		handleLinks(links) {
 			this.tool.links = this.encodeLinks(links);
+		},
+		handleDemo(links) {
+			this.tool.demo = this.encodeLinks(links);
 		}
 	},
 	components: {

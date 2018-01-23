@@ -1,8 +1,8 @@
 let LinkListInput = Vue.component("link-list-input-component", {
 	template: 	`<div class="my-4">
 					<label>
-						<i class="fa fa-link"></i>
-						Links
+						<i v-bind:class="iconClass"></i>
+						{{ title }}
 					</label>
 					<p class="card-text pl-4 text-muted" v-if="!internalLinks.length">No links added.</p>
 					<ul>
@@ -40,6 +40,15 @@ let LinkListInput = Vue.component("link-list-input-component", {
 		links: {
 			type: Array,
 			required: true
+		},
+		title: {
+			type: String,
+			required: true
+		},
+		iconClass: {
+			type: String,
+			required: false,
+			default: "fa fa-link"
 		}
 	},
 	data() {
