@@ -83,7 +83,7 @@ let ToolList = Vue.component("tools-list-component", {
 					}
 				},
 				(err) => {
-					EventBus.$emit("alert", { type: "danger", message: "Error synchronizing tools. More details on console" });
+					EventBus.$emit("alert", { type: "danger", message: "Error synchronizing tools. Check console for more details" });
 					console.error(err);
 				}
 			);
@@ -96,7 +96,7 @@ let ToolList = Vue.component("tools-list-component", {
 						this.syncTools();
 					},
 					(err) => {
-						EventBus.$emit("alert", { type: "danger", message: "Error deleting tool. More details on console" });
+						EventBus.$emit("alert", { type: "danger", message: "Error deleting tool. Check console for more details" });
 						console.error(err);
 					}
 				);

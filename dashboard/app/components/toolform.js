@@ -9,18 +9,18 @@ let ToolForm = Vue.component("toolform-component", {
 									<div class="form-group">
 										<label for="title">
 											<i class="fa fa-cog"></i>
-											Title
+											Title <span class="text-danger">*</span>
 										</label>
-										<input id="title" type="text" class="form-control" v-model="tool.title" placeholder="Tool title or name">
+										<input id="title" type="text" class="form-control" v-model="tool.title" placeholder="Tool title or name" required>
 									</div>
 								</div>
 								<div class="col">
 									<div class="form-group">                                           
 										<label for="tags">
 											<i class="fa fa-tag"></i>
-											Tags
+											Tags <span class="text-danger">*</span>
 										</label>
-										<select id="tags" class="form-control" v-model="tool.tag">
+										<select id="tags" class="form-control" v-model="tool.tag" required>
 											<option v-for="tag in tags" v-bind:value="tag | formatName">{{ tag }}</option>
 										</select>
 									</div>
@@ -32,7 +32,7 @@ let ToolForm = Vue.component("toolform-component", {
 									<div class="form-group">
 										<label for="description">
 											<i class="fa fa-align-left"></i>
-											Description
+											Description <span class="text-danger">*</span>
 										</label>
 										<textarea id="description" class="form-control" v-model="tool.description" placeholder="Short description to introduce tool applications..."></textarea>
 									</div>
@@ -41,7 +41,7 @@ let ToolForm = Vue.component("toolform-component", {
 									<div class="form-group">                                            
 										<label for="status">
 											<i class="fa fa-thermometer-full"></i>
-											Status
+											Status <span class="text-danger">*</span>
 										</label>
 										<select id="status" class="form-control" v-model="tool.status">
 											<option v-for="state in states" v-bind:value="state | formatName">{{ state }}</option>
@@ -50,7 +50,7 @@ let ToolForm = Vue.component("toolform-component", {
 								</div>
 							</div>
 
-							<linklist-input title="Links" icon="" :links="decodeLinks(tool.links)" v-on:change="handleLinks"></linklist-input>
+							<linklist-input title="Links" iconClass="fa fa-link" :links="decodeLinks(tool.links)" v-on:change="handleLinks" :required="true"></linklist-input>
 						</div>
 
 						<div class="card-footer">
@@ -125,7 +125,7 @@ let ToolForm = Vue.component("toolform-component", {
 				}, 
 				(err) => {
 					console.error(err);
-					EventBus.$emit("alert", { type: "danger", message: "Error getting tool info. More details on console" })
+					EventBus.$emit("alert", { type: "danger", message: "Error getting tool info. Check console for more details" })
 				}
 			);
 		}
@@ -168,18 +168,6 @@ let ToolForm = Vue.component("toolform-component", {
 		decodeSteps(text) {
 			return (text) ? text.split("||") : [];
 		},
-		sendInfo() {
-			if (this.toolKey === "new") {
-				this.$database.append('tools/', this.tool, console.log, 1);
-			} else {
-				this.$database.update('tools/', this.toolKey, this.tool, console.log, console.error);
-			}
-			Router.push({ name: "tools" });
-
-		},
-		validateInfo() {
-
-		},
 		handleLinks(links) {
 			this.tool.links = this.encodeLinks(links);
 		},
@@ -188,6 +176,38 @@ let ToolForm = Vue.component("toolform-component", {
 		},
 		handleSteps(steps) {
 			this.tool.steps = this.encodeSteps(steps);
+		},
+		validForm() {
+			return (this.tool.title && this.tool.description && this.tool.links && this.tool.tag && this.tool.status);
+		},
+		sendInfo() {
+			if (this.validForm()) {
+				if (this.toolKey === "new") {
+					this.$database.append('tools/', this.tool, 
+						() => {
+							EventBus.$emit("alert", { type: "success", message: `Tool ${ this.tool.title } created!` });
+						},
+						(err) => {
+							console.error(err);
+							EventBus.$emit("alert", { type: "danger", message: "Error creating tool. Check console for more details" });
+						}
+					);
+				} else {
+					this.$database.update('tools/', this.toolKey, this.tool, 
+						() => {
+							EventBus.$emit("alert", { type: "success", message: `Tool ${ this.tool.title } updated!` });
+						},
+						(err) => {
+							console.error(err);
+							EventBus.$emit("alert", { type: "danger", message: "Error updating tool. Check console for more details" });
+						}
+					);
+				}
+				
+				Router.push({ name: "tools" });
+			} else {
+				EventBus.$emit("alert", { type: "warning", message: "Please fill in all necessary fields" })
+			}
 		}
 	},
 	components: {

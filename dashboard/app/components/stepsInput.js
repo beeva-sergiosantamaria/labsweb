@@ -2,7 +2,7 @@ let StepsInput = Vue.component("steps-input-component", {
 	template: 	`<div class="my-4">
 					<label>
 						<i v-bind:class="iconClass"></i>
-						{{ title }}
+						{{ title }} <span class="text-danger" v-if="required">*</span>
 					</label>
 					<p class="card-text pl-4 text-muted" v-if="!internalSteps.length">No step found.</p>
 					<ul class="list-group list-group-flush my-3" v-if="internalSteps.length">
@@ -48,6 +48,11 @@ let StepsInput = Vue.component("steps-input-component", {
 			type: String,
 			required: false,
 			default: "fa fa-link"
+		},
+		required: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	data() {
