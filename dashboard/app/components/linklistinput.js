@@ -61,10 +61,8 @@ let LinkListInput = Vue.component("link-list-input-component", {
 		links(value) {
 			this.internalLinks = value;
 		},
-		internalLinks: {
-			handler(value) {
-				this.$emit("change", value);
-			}
+		internalLinks(value) {
+			this.$emit("change", value);
 		}
 	},
 	methods: {

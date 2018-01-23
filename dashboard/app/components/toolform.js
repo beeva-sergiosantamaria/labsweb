@@ -56,22 +56,17 @@ let ToolForm = Vue.component("toolform-component", {
 						<div class="card-footer">
 							<p class="card-text">Optional information</p>
 
-							<linklist-input title="Demo" iconClass="fa fa-film" :links="decodeLinks(tool.demo)" v-on:change="handleDemo"></linklist-input>
+							<linklist-input title="Graphic material" iconClass="fa fa-bar-chart" :links="decodeLinks(tool.graphic)" v-on:change="handleGraphic"></linklist-input>
 
 							<div class="form-group">
-								<label for="graphic">
-									<i class="fa fa-bar-chart"></i>
-									Graphic material
+								<label for="demo">
+									<i class="fa fa-film"></i>
+									Demo
 								</label>
-								<textarea id="graphic" class="form-control" v-model="tool.graphic" placeholder="Graphic resources like infographics, presentations,..."></textarea>
+								<input id="demo" type="text" class="form-control" v-model="tool.demo" placeholder="Url address to demo resource (video, ppt, ...).">
 							</div>
-							<div class="form-group">											
-								<label for="firststeps">
-									<i class="fa fa-list-ol"></i>
-									First steps
-								</label>
-								<textarea class="form-control" v-model="tool.firststeps" placeholder="Simple steps to start simple project or experiment..."></textarea>
-							</div>
+
+							<steps-input title="First steps" iconClass="fa fa-list-ol" :steps="decodeSteps(tool.steps)"></steps-input>
 								
 							<button type="button" class="btn btn-pill btn-primary btn-block mt-5 mb-4" v-on:click="sendInfo">
 								<i class="fa fa-floppy-o mr-2"></i>
@@ -167,6 +162,12 @@ let ToolForm = Vue.component("toolform-component", {
 
 			return links;
 		},
+		encodeSteps(list) {
+			return list.join("||");
+		},
+		decodeSteps(text) {
+			return (text) ? text.split("||") : [];
+		},
 		sendInfo() {
 			if (this.toolKey === "new") {
 				this.$database.append('tools/', this.tool, console.log, 1);
@@ -182,11 +183,15 @@ let ToolForm = Vue.component("toolform-component", {
 		handleLinks(links) {
 			this.tool.links = this.encodeLinks(links);
 		},
-		handleDemo(links) {
-			this.tool.demo = this.encodeLinks(links);
+		handleGraphic(links) {
+			this.tool.graphic = this.encodeLinks(links);
+		},
+		handleSteps(steps) {
+			this.tool.steps = this.encodeSteps(steps);
 		}
 	},
 	components: {
-		"linklist-input": LinkListInput
+		"linklist-input": LinkListInput,
+		"steps-input": StepsInput
 	}
 });
