@@ -44,7 +44,7 @@ let ToolForm = Vue.component("toolform-component", {
 											Status
 										</label>
 										<select id="status" class="form-control" v-model="tool.status">
-											<option v-for="state in technologyStates" v-bind:value="state | formatName">{{ state }}</option>
+											<option v-for="state in states" v-bind:value="state | formatName">{{ state }}</option>
 										</select>
 									</div>
 								</div>
@@ -86,18 +86,8 @@ let ToolForm = Vue.component("toolform-component", {
 				</div>`,
 	data(){
 		return{
-			user: {},
 			toolKey: "",
-			tool: {
-				title: "",
-				description: "",
-				links: "",
-				demo: "",
-				graphic: "",
-				firststeps: "",
-				tag: "",
-				status:""
-			},
+			tool: {},
 			tags: [
 				"Frontend", 
 				"Backend", 
@@ -113,9 +103,10 @@ let ToolForm = Vue.component("toolform-component", {
 				"UX",
 				"UI"
 			],
-			technologyStates: [
+			states: [
 				"Adopt",
-				"Wait"
+				"Wait",
+				"Work in progress"
 			]
 		}
 	},
