@@ -50,7 +50,7 @@ let ToolForm = Vue.component("toolform-component", {
 								</div>
 							</div>
 
-							<linklist-input :links="currentLinks" v-on:change="handleList"></linklist-input>
+							<linklist-input :links="decodeLinks(tool.links)" v-on:change="handleList"></linklist-input>
 						</div>
 
 						<div class="card-footer">
@@ -88,7 +88,6 @@ let ToolForm = Vue.component("toolform-component", {
 		return{
 			user: {},
 			toolKey: "",
-			currentLinks: "",
 			tool: {
 				title: "",
 				description: "",
@@ -110,12 +109,13 @@ let ToolForm = Vue.component("toolform-component", {
 				"Security", 
 				"Blockchain", 
 				"DevOps", 
-				"Human Computer Interfaces"
+				"Human Computer Interfaces",
+				"UX",
+				"UI"
 			],
 			technologyStates: [
 				"Adopt",
-				"Transfer",
-				"Core",
+				"Wait"
 			]
 		}
 	},
@@ -150,6 +150,29 @@ let ToolForm = Vue.component("toolform-component", {
 		}
 	},
 	methods: {
+		encodeLinks(list) {
+			let texts = [];
+			list.forEach((link) => {
+				texts.push(`${ link.title }||${ link.url }`);
+			});
+			return texts.join("\n");
+		},
+		decodeLinks(text) {
+			let links = [];
+			
+			if (text) {
+				links = text.split("\n").map((item) => {
+					let splited = item.split("||");
+
+					return {
+						title: splited[0],
+						url: splited[1]
+					};
+				});
+			}
+
+			return links;
+		},
 		sendInfo() {
 			if (this.toolKey === "new") {
 				this.$database.append('tools/', this.tool, console.log, 1);
@@ -163,7 +186,7 @@ let ToolForm = Vue.component("toolform-component", {
 
 		},
 		handleList(links) {
-			this.tool.links = links;
+			this.tool.links = this.encodeLinks(links);
 		}
 	},
 	components: {

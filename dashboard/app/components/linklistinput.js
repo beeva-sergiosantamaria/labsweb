@@ -38,40 +38,23 @@ let LinkListInput = Vue.component("link-list-input-component", {
 				</div>`,
 	props: {
 		links: {
-			type: String,
+			type: Array,
 			required: true
 		}
 	},
 	data() {
 		return {
 			newLink: {},
-			initialLinks: this.links,
 			internalLinks: []
 		}
 	},
-	created() {
-		
-	},
 	watch: {
-		links: {
-			handler(value) {
-				let linkList = value.split("\n");
-				linkList.forEach((link) => {
-					let title = link.split("||")[0];
-					let url = link.split("||")[1];
-					this.internalLinks.push({ title, url });
-				});
-			}
+		links(value) {
+			this.internalLinks = value;
 		},
 		internalLinks: {
 			handler(value) {
-				let links = [];
-				value.forEach((link) => {
-					links.push(`${ link.title }||${ link.url }`);
-				});
-
-				let raw = links.join("\n");
-				this.$emit("change", raw);
+				this.$emit("change", value);
 			}
 		}
 	},
