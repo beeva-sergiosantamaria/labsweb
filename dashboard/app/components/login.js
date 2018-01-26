@@ -34,13 +34,13 @@ let Login = Vue.component("login-component", {
 						},
 						(err) => {
 							console.error(err);
-							EventBus.$emit("alert", { type: "danger", message: "Error getting users. More details on console" })
+							EventBus.$emit("alert", { type: "danger", message: "Error getting users. Check console for more details" })
 						}
 					);
 				},
 				(err) => {
 					console.error(err);
-					EventBus.$emit("alert", { type: "danger", message: "Error validating user data. More details on console" });
+					EventBus.$emit("alert", { type: "danger", message: "Error validating user data. Check console for more details" });
 				}
 			);
 		}

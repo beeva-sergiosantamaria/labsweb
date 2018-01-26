@@ -38,7 +38,7 @@ let Navbar = Vue.component("navbar-component", {
 				},
 				(err) => {
 					console.error(err);
-					EventBus.$emit("alert", { type: "danger", message: "Error logging out. More details on console!" });
+					EventBus.$emit("alert", { type: "danger", message: "Error logging out. Check console for more details!" });
 				}
 			);
 		}
